@@ -59,7 +59,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'UC Berkeley Architecture Research Project Landing Page'
-copyright = u'2023, Berkeley Architecture Research'
+copyright = str(datetime.now().year) + ', Berkeley Architecture Research'
 author = u'Berkeley Architecture Research'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -79,6 +79,7 @@ if on_rtd:
 # - procedurally generate github URL references using via `gh-file-ref`
 if on_rtd:
     rtd_version = os.environ.get("READTHEDOCS_VERSION")
+    rtd_project = os.environ.get("READTHEDOCS_PROJECT")
     if rtd_version in ["stable", "latest"]:
         # get the latest git tag (which is what rtd normally builds under "stable")
         # this works since rtd builds things within the repo
@@ -90,6 +91,15 @@ if on_rtd:
             version = "v?.?.?" # this should not occur as "stable" is always pointing to tagged version
     else:
         version = rtd_version # name of a branch
+
+    rtd_main_project = rtd_main_project # in this case, this is the main project
+    # add two dialogs to search (one of just this project, one of all projects)
+    rtd_sphinx_search_filters = {
+        "Search UCB BAR Landing Page": f"project:{rtd_project}/{rtd_version}",
+        "Search all UCB BAR Projects": f"subprojects:{rtd_main_project}/{rtd_version}",
+    }
+    # default to searching all projects
+    rtd_sphinx_search_default_filter = f"subprojects:{rtd_main_project}/{rtd_version}"
 elif on_gha:
     # GitHub actions does a build of the docs to ensure they are free of warnings.
     # Looking up a branch name or tag requires switching on the event type that triggered the workflow
