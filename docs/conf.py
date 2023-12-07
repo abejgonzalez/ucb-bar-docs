@@ -22,7 +22,7 @@
 
 import os
 import subprocess
-import datetime
+from datetime import datetime
 
 # -- General configuration ------------------------------------------------
 
