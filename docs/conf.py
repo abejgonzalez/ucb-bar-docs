@@ -93,7 +93,7 @@ if on_rtd:
     else:
         version = rtd_version # name of a branch
 
-    rtd_main_project = rtd_main_project # in this case, this is the main project
+    rtd_main_project = rtd_project # in this case, this is the main project
     # add two dialogs to search (one of just this project, one of all projects)
     rtd_sphinx_search_filters = {
         "Search UCB BAR Landing Page": f"project:{rtd_project}/{rtd_version}",
